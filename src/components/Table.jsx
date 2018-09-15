@@ -1,12 +1,21 @@
 import React, {Component} from 'react';
-// import TableRow from './TableRow';
+import moment from 'moment';
 
 class Table extends Component {
   constructor(props) {
       super(props);
-      this.state = {
-        users: this.props.users
-      };
+
+      this.handleDelete = this.handleDelete.bind(this);
+      this.handleEdit = this.handleEdit.bind(this);
+  }
+
+  handleDelete(e) {
+    this.props.deleteUser(e);
+  }
+
+  handleEdit(e) {
+    this.props.editModeOn();
+    this.props.setEditableUser(e);
   }
 
   render() {
@@ -25,15 +34,14 @@ class Table extends Component {
             <tr key={index}>
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>
-              <td>{user.dob}</td>
+              <td>{moment(user.dob).format('DD/MM/YYYY')}</td>
               <td>{user.location}</td>
               <td>
-                <button type='button'>Edit</button>
-                <button type='button'>Delete</button>
+                <button id={'eidt-' + user.id} type='button' onClick={this.handleEdit}>Edit</button>
+                <button id={user.id} type='button' onClick={this.handleDelete}>Delete</button>
               </td>
             </tr>
           )}
-
         </tbody>
       </table>
     );

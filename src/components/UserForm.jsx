@@ -4,50 +4,38 @@ import axios from 'axios';
 class UserForm extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      dob: '',
-      first_name: '',
-      last_name: '',
-      location: ''
-    }
 
     this.addUser = this.addUser.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleNameChange = this.handleNameChange.bind(this);
-    this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handleLocationChange = this.handleLocationChange.bind(this);
-    this.handleDOBChange = this.handleDOBChange.bind(this);
   }
 
   addUser() {
     axios.post('/users', {
-      dob: this.state.dob,
-      first_name: this.state.first_name,
-      id: "11",
-      last_name: this.state.last_name,
-      location: this.state.location
+      first_name: this.props.first_name,
+      last_name: this.props.last_name,
+      dob: this.props.dob,
+      location: this.props.location
     })
+  }
+
+  updateUser() {
+    const id = this.props.editableUser;
+    axios.put(`users/${id}`, {
+      first_name: this.props.first_name,
+      last_name: this.props.last_name,
+      dob: this.props.dob,
+      location: this.props.location
+    });
+    this.props.editModeOff();
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    this.addUser();
-  }
+    if (!this.props.editMode) {this.addUser();}
+    else {this.updateUser();}
 
-  handleNameChange(event) {
-    this.setState({first_name: event.target.value})
-  }
-
-  handleLastNameChange(event) {
-    this.setState({last_name: event.target.value})
-  }
-
-  handleLocationChange(event) {
-    this.setState({location: event.target.value})
-  }
-
-  handleDOBChange(event) {
-    this.setState({dob: event.target.value})
+    this.props.clearForm();
+    this.props.updateData();
   }
 
   render() {
@@ -58,8 +46,8 @@ class UserForm extends Component {
           <input
             id='name'
             type='text'
-            value={this.state.first_name}
-            onChange={this.handleNameChange}
+            value={this.props.first_name}
+            onChange={this.props.handleNameChange}
             >
           </input>
         </div>
@@ -68,8 +56,8 @@ class UserForm extends Component {
           <input
             htmlFor='lastName'
             type='text'
-            value={this.state.last_name}
-            onChange={this.handleLastNameChange}
+            value={this.props.last_name}
+            onChange={this.props.handleLastNameChange}
             >
           </input>
         </div>
@@ -78,8 +66,8 @@ class UserForm extends Component {
           <input
             id='birthday'
             type='date'
-            value={this.state.dob}
-            onChange={this.handleDOBChange}
+            value={this.props.dob}
+            onChange={this.props.handleDOBChange}
             >
           </input>
         </div>
@@ -88,13 +76,14 @@ class UserForm extends Component {
           <input
             id='location'
             type='text'
-            value={this.state.location}
-            onChange={this.handleLocationChange}
+            value={this.props.location}
+            onChange={this.props.handleLocationChange}
             >
           </input>
         </div>
 
         <input
+          disabled={this.props.isDisabled}
           className='btn'
           type='submit'
           value='Submit'
