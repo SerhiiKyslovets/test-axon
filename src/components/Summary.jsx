@@ -43,6 +43,8 @@ class Summary extends Component {
   }
 
   getLongest() {
+    if (!this.props.users.length) return;
+
     const allUsers = this.props.users;
     const fullNames = [];
     var maxI = 0;
@@ -60,7 +62,9 @@ class Summary extends Component {
       }
     })
 
-    console.log(allUsers[maxI]);
+    const longestOne = allUsers[maxI];
+
+    return `${ longestOne.first_name } ${ longestOne.last_name }`;
   }
 
   render() {

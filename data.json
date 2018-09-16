@@ -28,16 +28,9 @@
   },
   {
     "id": "10",
-    "first_name": "Millicent",
+    "first_name": "Mil",
     "last_name": "Hurrell",
-    "dob": "01.01.2010",
+    "dob": "2010-01-01",
     "location": "Kiev"
-  },
-  {
-    "id": "95585b51-4a09-4f87-b0cb-7d0205f9991f",
-    "first_name": "sdf",
-    "last_name": "sdf",
-    "dob": "1992-07-09",
-    "location": "sdfa"
   }
 ]

@@ -58,23 +58,42 @@ class App extends Component {
   }
 
   handleNameChange(event) {
-    this.setState({first_name: event.target.value});
-    this.handleDisabled();
+    this.handleFieldChange('first_name', event.target.value);
   }
 
   handleLastNameChange(event) {
-    this.setState({last_name: event.target.value});
-    this.handleDisabled();
+    this.handleFieldChange('last_name', event.target.value);
   }
 
   handleLocationChange(event) {
-    this.setState({location: event.target.value});
-    this.handleDisabled();
+    this.handleFieldChange('location', event.target.value);
   }
 
   handleDOBChange(event) {
-    this.setState({dob: event.target.value});
-    this.handleDisabled();
+    this.handleFieldChange('dob', event.target.value);
+  }
+
+  handleFieldChange(name, value) {
+    const obj = {};
+
+    obj[name] = value;
+    obj.isDisabled = !this.validateForm(obj);
+
+    this.setState(obj);
+  }
+
+  validateForm(opts) {
+    const requiredKeys = ['first_name', 'last_name', 'dob', 'location'];
+
+    for (let i = 0; i < requiredKeys.length; i++) {
+      let key = requiredKeys[i];
+
+      if (opts[key] === '' || (!opts[key] && !this.state[key])) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   setEditableUser(e) {
