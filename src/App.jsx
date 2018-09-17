@@ -37,16 +37,7 @@ class App extends Component {
       this.editModeOn = this.editModeOn.bind(this);
       this.editModeOff = this.editModeOff.bind(this);
       this.clearForm = this.clearForm.bind(this);
-      this.handleDisabled = this.handleDisabled.bind(this);
-  }
-
-  handleDisabled() {
-    if ((this.state.first_name !== '') && (this.state.last_name !== '') &&
-    (this.state.dob !== '') && (this.state.location !== '')) {
-      this.setState({isDisabled: false});
-    } else {
-      this.setState({isDisabled: true});
-    }
+      this.setDisabled = this.setDisabled.bind(this);
   }
 
   editModeOn() {
@@ -55,6 +46,10 @@ class App extends Component {
 
   editModeOff() {
     this.setState({ editMode: false});
+  }
+
+  setDisabled() {
+    this.setState({ isDisabled: true});
   }
 
   handleNameChange(event) {
@@ -96,9 +91,7 @@ class App extends Component {
     return true;
   }
 
-  setEditableUser(e) {
-    //Remove prefix 'eidt-'
-    const id = (e.target.id).slice(5);
+  setEditableUser(id) {
     this.setState({editableUser: id});
     const editableUserData = this.getDataById(id);
 
@@ -122,17 +115,16 @@ class App extends Component {
     this.updateData();
   }
 
-  deleteUser(event) {
-    const id = event.target.id;
-    axios.delete(`users/${id}`);
-    this.setState({
-      editMode: false,
-      dob: '',
-      first_name: '',
-      last_name: '',
-      location: ''
-    });
-    this.updateData();
+  deleteUser(id) {
+    axios.delete(`users/${id}`)
+      .then(this.setState({
+        editMode: false,
+        dob: '',
+        first_name: '',
+        last_name: '',
+        location: ''
+      }))
+      .then(this.updateData());
   }
 
   updateData() {
@@ -182,6 +174,7 @@ class App extends Component {
             editableUser={this.state.editableUser}
             clearForm={this.clearForm}
             isDisabled={this.state.isDisabled}
+            setDisabled={this.setDisabled}
         />
       </div>
     );

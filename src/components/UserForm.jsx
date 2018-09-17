@@ -36,6 +36,8 @@ class UserForm extends Component {
 
     this.props.clearForm();
     this.props.updateData();
+
+    this.props.setDisabled();
   }
 
   render() {

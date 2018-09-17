@@ -10,12 +10,17 @@ class Table extends Component {
   }
 
   handleDelete(e) {
-    this.props.deleteUser(e);
+    const name = e.target.name;
+    const id = this.refs[name].id;
+    this.props.deleteUser(id);
   }
 
   handleEdit(e) {
     this.props.editModeOn();
-    this.props.setEditableUser(e);
+
+    const name = e.target.name;
+    const id = this.refs[name].id;
+    this.props.setEditableUser(id);
   }
 
   render() {
@@ -31,14 +36,14 @@ class Table extends Component {
           </tr>
 
           {this.props.users.map((user, index) =>
-            <tr key={index}>
+            <tr key={index} id={user.id} ref={ 'row' + index }>
               <td>{user.first_name}</td>
               <td>{user.last_name}</td>
               <td>{moment(user.dob).format('DD/MM/YYYY')}</td>
               <td>{user.location}</td>
               <td>
-                <button id={'eidt-' + user.id} type='button' onClick={this.handleEdit}>Edit</button>
-                <button id={user.id} type='button' onClick={this.handleDelete}>Delete</button>
+                <button name={ 'row' + index } type='button' onClick={this.handleEdit}>Edit</button>
+                <button name={ 'row' + index } type='button' onClick={this.handleDelete}>Delete</button>
               </td>
             </tr>
           )}

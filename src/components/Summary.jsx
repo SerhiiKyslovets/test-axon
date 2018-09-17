@@ -2,18 +2,6 @@ import React, {Component} from 'react';
 import moment from 'moment';
 
 class Summary extends Component {
-  constructor(props) {
-      super(props);
-
-      this.state = {
-        sumOfAges: Number,
-        LongestString: String
-      }
-
-      this.getAmount = this.getAmount.bind(this);
-      this.getSum = this.getSum.bind(this);
-      this.getLongest = this.getLongest.bind(this);
-  }
 
   getAmount() {
     const allUsers = this.props.users;
@@ -39,11 +27,21 @@ class Summary extends Component {
         else { return -1; }
     });
 
-    return ages[0] + ages[1] + ages[2];
+    let sumThree = 0;
+
+    let result = ages.reduce((sum, current, i) => {
+      if (i < 3) {
+        sumThree = sum + current;
+      }
+
+      return sumThree;
+    }, 0);
+
+    return result
   }
 
   getLongest() {
-    if (!this.props.users.length) return;
+    if (!this.props.users.length) return '-';
 
     const allUsers = this.props.users;
     const fullNames = [];
