@@ -117,14 +117,16 @@ class App extends Component {
 
   deleteUser(id) {
     axios.delete(`users/${id}`)
-      .then(this.setState({
-        editMode: false,
-        dob: '',
-        first_name: '',
-        last_name: '',
-        location: ''
-      }))
-      .then(this.updateData());
+      .then(() => {
+          this.setState({
+            editMode: false,
+            dob: '',
+            first_name: '',
+            last_name: '',
+            location: ''
+          })
+      })
+      .then(() => this.updateData());
   }
 
   updateData() {

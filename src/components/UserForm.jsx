@@ -16,6 +16,9 @@ class UserForm extends Component {
       dob: this.props.dob,
       location: this.props.location
     })
+    .then(() => this.props.clearForm())
+    .then(() => this.props.updateData())
+    .then(() => this.props.setDisabled());
   }
 
   updateUser() {
@@ -25,19 +28,19 @@ class UserForm extends Component {
       last_name: this.props.last_name,
       dob: this.props.dob,
       location: this.props.location
-    });
+    })
+    .then(() => this.props.clearForm())
+    .then(() => this.props.updateData())
+    .then(() => this.props.setDisabled());
+
     this.props.editModeOff();
   }
 
   handleSubmit(event) {
     event.preventDefault();
-    if (!this.props.editMode) {this.addUser();}
+
+    if (!this.props.editMode) {this.addUser();} 
     else {this.updateUser();}
-
-    this.props.clearForm();
-    this.props.updateData();
-
-    this.props.setDisabled();
   }
 
   render() {
