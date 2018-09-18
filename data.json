@@ -8,24 +8,10 @@
   },
   {
     "id": "0da44f1f-13b6-42f4-adf3-aca54e59e877",
-    "first_name": "RealyLongName",
+    "first_name": "RealyLon",
     "last_name": "SurnameToo",
     "dob": "2018-09-16",
     "location": "Berlin"
-  },
-  {
-    "id": "a3c98c09-9d80-4413-a656-1d68bbabf197",
-    "first_name": "sdf",
-    "last_name": "sd=",
-    "dob": "2018-09-07",
-    "location": "f"
-  },
-  {
-    "id": "42cf211a-cd24-4403-b54f-86a27c8356ea",
-    "first_name": "s",
-    "last_name": "sdf",
-    "dob": "2018-09-07",
-    "location": "sfsdf"
   },
   {
     "id": "5c3a7cea-f236-41a7-a823-9c823eb8c8fe",
@@ -33,13 +19,6 @@
     "last_name": "Surname",
     "dob": "2018-09-15",
     "location": "ne kiev"
-  },
-  {
-    "id": "cfd6913c-9984-49a1-8fd7-ac966debc765",
-    "first_name": "asdfad",
-    "last_name": "asdf",
-    "dob": "2018-09-28",
-    "location": "asdfdsaf"
   },
   {
     "id": "32671ee1-c69a-41aa-845f-2f383f6e8297",
